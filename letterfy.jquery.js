@@ -47,7 +47,63 @@
     // Place initialization logic here
     // You already have access to the DOM element and the options via the instance, 
     // e.g., this.element and this.options
+    // var elements = $('body');
+    var elements = this.element;
+    // console.log(this.element)
+    var loop_done = false;
 
+    $(elements).each(function(n, el) {
+      $element = $(this);
+      letters = $element.text().split('');
+
+      if ($element.find('a') && $element.find('a').attr('href')) {
+        url = $element.find('a').attr('href');
+      } else {
+        url = false;
+      }
+
+      if (url) {
+        $element.html('<a target="_blank" href="' + url + '"></a>')
+      } else {
+        $element.html('')
+      }
+
+      for (var i = 0; i < letters.length; i++) {
+        if (url) {
+          $element.find('a').append('<span class="letter">' + letters[i] + '</span>');
+        } else {
+          $element.append('<span class="letter">' + letters[i] + '</span>');
+        }
+      };
+    });
+
+    var letterLength = $('.letter').length - 1;
+    var top = []
+    var left = []
+    var origCoords = {}
+
+    $('.letter').each(function(n) {
+      offsetTop = $(this).offset().top;
+      offsetLeft = $(this).offset().left;
+
+      top.push(offsetTop);
+      left.push(offsetLeft);
+
+      $(this).css({
+        'top' : offsetTop,
+        'left' : offsetLeft
+      })
+      if (n == letterLength) {
+        $('.letter').css({
+          'position':'absolute'
+        })
+      }
+    });
+
+    origCoords['left'] = left;
+    origCoords['top'] = top;
+
+    return origCoords;
     
 
   };
