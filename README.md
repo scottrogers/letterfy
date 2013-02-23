@@ -1,10 +1,9 @@
 letterfy.js
 ========
 
-A jquery plugin that will scan the children elements within your selector wrap them in spans so you can treat them as individual letters.
---------
+#### A jquery plugin that will scan the children elements within your selector wrap them in spans so you can treat them as individual letters.
 
-*Ex:*
+*initialize:*
 $('body').letterfy();
 
 In action:
